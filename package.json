@@ -1,0 +1,12 @@
+{
+  "name": "commercial-cre-ai-schemas",
+  "version": "1.0.0",
+  "description": "B2B AI Agent web parsing schemas",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
