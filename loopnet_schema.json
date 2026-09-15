@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org",
+  "title": "CommercialRealEstateAssetMap",
+  "description": "B2B schema mapping loopnet commercial asset data structures for autonomous AI agent ingestion.",
+  "type": "object",
+  "required": ["source_url", "timestamp", "listings"],
+  "properties": {
+    "source_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "The exact regional LoopNet commercial search entry point."
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "listings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["property_id", "title", "price", "location"],
+        "properties": {
+          "property_id": {
+            "type": "string",
+            "description": "Unique identifier scraped from data-id or href tags."
+          },
+          "title": {
+            "type": "string",
+            "description": "Asset name, e.g., 'Class A Logistics Warehouse Hub'."
+          },
+          "price": {
+            "type": "object",
+            "required": ["amount", "currency", "price_per_sqft"],
+            "properties": {
+              "amount": { "type": ["number", "null"] },
+              "currency": { "type": "string", "default": "USD" },
+              "price_per_sqft": { "type": ["number", "null"] }
+            }
+          },
+          "location": {
+            "type": "object",
+            "required": ["street_address", "city", "state", "zip_code"],
+            "properties": {
+              "street_address": { "type": "string" },
+              "city": { "type": "string" },
+              "state": { "type": "string", "maxLength": 2 },
+              "zip_code": { "type": "string" }
+            }
+          },
+          "specifications": {
+            "type": "object",
+            "properties": {
+              "building_size_sqft": { "type": "number" },
+              "property_type": { "type": "string", "enum": ["Industrial", "Retail", "Office", "Multi-Family", "Land"] },
+              "cap_rate_percentage": { "type": ["number", "null"] },
+              "clear_height_feet": { "type": ["number", "null"] }
+            }
+          }
+        }
+      }
+    }
+  }
+}
